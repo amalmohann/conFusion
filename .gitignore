@@ -11,6 +11,10 @@
 # production
 /build
 
+#misc
+/src/components/DishDetailsComponent(mine).js
+/src/components/MenuComponent(mine).js
+
 # misc
 .DS_Store
 .env.local
