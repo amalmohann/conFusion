@@ -3,9 +3,6 @@ import { Card, CardImg, CardBody, CardText, CardTitle } from 'reactstrap';
 
 class DishDetail extends Component {
 
-    constructor(props){
-        super(props);
-    }
 
     renderComments(comments) {
         const coments = comments.map(comment => {
@@ -18,7 +15,6 @@ class DishDetail extends Component {
                         day: '2-digit',
                         month: 'long',
                         year: 'numeric'
-
                     }).format(new Date(comment.date))}
                     </p>
                 </li>
