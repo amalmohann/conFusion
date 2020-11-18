@@ -1,38 +1,18 @@
 import React, { Component } from 'react';
-import { BreadcrumbItem, Breadcrumb, Form, FormGroup, Button, Input, Label, Col } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Button, Row, Col, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Control, LocalForm, Errors } from 'react-redux-form';
 
 class Contact extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            fname: '',
-            lname: '',
-            telno: '',
-            email: '',
-            agree: false,
-            contactType: '',
-            message: ''
-        }
-
-        this.handleInputChange = this.handleInputChange.bind(this);
         this.handleOnSubmit = this.handleOnSubmit.bind(this);
     }
 
-    handleOnSubmit(event) {
-        console.log(`The current state is ${JSON.stringify(this.state)}`);
-        alert(`The current state is ${JSON.stringify(this.state)}`);
-        event.preventDefault();
-
-    }
-    handleInputChange(event) {
-        const target = event.target;
-        const value = (target.type === 'checkbox' ? target.checked : target.value);
-        const name = target.name;
-        this.setState({
-            [name]: value
-        });
+    handleOnSubmit(values) {
+        console.log(`The current state is ${JSON.stringify(values)}`);
+        alert(`The current state is ${JSON.stringify(values)}`);
     }
 
     render() {
@@ -54,8 +34,8 @@ class Contact extends Component {
                         <h5>Our Address</h5>
                         <address>
                             121, Clear Water Bay Road<br />
-                        Clear Water Bay, Kowloon<br />
-                        HONG KONG<br />
+                            Clear Water Bay, Kowloon<br />
+                            HONG KONG<br />
                             <i className="fa fa-phone"></i>: +852 1234 5678<br />
                             <i className="fa fa-fax"></i>: +852 8765 4321<br />
                             <i className="fa fa-envelope"></i>: <a href="mailto:confusion@food.net">confusion@food.net</a>
@@ -77,61 +57,61 @@ class Contact extends Component {
                         <h3>Send us your Feedback</h3>
                     </div>
                     <div className="col-12 col-md-9">
-                        <Form onSubmit={this.handleOnSubmit}>
-                            <FormGroup row>
+                        <LocalForm onSubmit={(values)=>this.handleOnSubmit(values)}>
+                            <Row className="form-group">
                                 <Label htmlFor="fname" md={2}>First Name</Label>
                                 <Col md={10}>
-                                    <Input type="text" id="fname" name="fname" placeholder="First Name" value={this.state.fname} onChange={this.handleInputChange}></Input>
+                                    <Control.text  model=".fname" name="fname" placeholder="First Name" className="form-control"/>
                                 </Col>
-                            </FormGroup>
-                            <FormGroup row>
+                            </Row>
+                            <Row className="form-group">
                                 <Label htmlFor="lname" md={2}>Last Name</Label>
                                 <Col md={10}>
-                                    <Input type="text" id="lname" name="lname" placeholder="Last Name" value={this.state.lname} onChange={this.handleInputChange}></Input>
+                                    <Control.text model=".lname" id="lname" name="lname" placeholder="Last Name" className="form-control"/>
                                 </Col>
-                            </FormGroup>
-                            <FormGroup row>
+                            </Row>
+                            <Row className="form-group">
                                 <Label htmlFor="telno" md={2}>Tel no.</Label>
                                 <Col md={10}>
-                                    <Input type="text" id="telno" name="telno" placeholder="Tel no." value={this.state.telno} onChange={this.handleInputChange}></Input>
+                                    <Control.text model=".telno" id="telno" name="telno" placeholder="Tel no." className="form-control"/>
                                 </Col>
-                            </FormGroup>
-                            <FormGroup row>
+                            </Row>
+                            <Row className="form-group">
                                 <Label htmlFor="email" md={2}>Email</Label>
                                 <Col md={10}>
-                                    <Input type="text" id="email" name="email" placeholder="Email" value={this.state.email} onChange={this.handleInputChange}></Input>
+                                    <Control.text model=".email" id="email" name="email" placeholder="Email" className="form-control"/>
                                 </Col>
-                            </FormGroup>
-                            <FormGroup row>
+                            </Row>
+                            <Row className="form-group">
                                 <Col md={{ size: 6, offset: 2 }}>
-                                    <FormGroup check>
+                                    <div className="form-check">
                                         <Label check>
-                                            <Input type="checkbox" name="agree" checked={this.state.agree} onChange={this.handleInputChange} /> {' '}
+                                            <Control.checkbox model=".agree" name="agree" className="form-control"/> {' '}
                                             <strong>May we contact you?</strong>
                                         </Label>
-                                    </FormGroup>
+                                    </div>
                                 </Col>
                                 <Col md={{ size: 3, offset: 1 }}>
-                                    <Input type="select" name="contactType" value={this.state.contactType} onChange={this.handleInputChange}>
+                                    <Control.select model=".contactType" name="contactType" className="form-control">
                                         <option>Tel.</option>
                                         <option>Email</option>
-                                    </Input>
+                                    </Control.select>
                                 </Col>
-                            </FormGroup>
-                            <FormGroup row>
+                            </Row>
+                            <Row className="form-group">
                                 <Label htmlFor="message" md={2}>Your Feedback</Label>
                                 <Col md={10}>
-                                    <Input type="textarea" id="message" name="message" rows="12" value={this.state.message} onChange={this.handleInputChange}></Input>
+                                    <Control.textarea model=".message" id="message" name="message" rows="12" className="form-control"/>
                                 </Col>
-                            </FormGroup>
-                            <FormGroup row>
+                            </Row>
+                            <Row className="form-group">
                                 <Col md={{size: 10, offset: 2}}>
                                     <Button type="submit" color="primary">
                                         Send Feedback
                                     </Button>
                                 </Col>
-                            </FormGroup>
-                        </Form>
+                            </Row>
+                        </LocalForm>
                     </div>
                 </div>
             </div>
